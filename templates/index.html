@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Grain Hub</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <header>
+        <div class="main">
+            <dir class="logo">
+                <img src="{{url_for('static',filename='logo2.png')}}">
+            </dir>
+            <ul>
+                <li ><a href="#" >Home</a></li>
+                <li><a href="#" >Categories</a></li>
+                <li><a href="#" >Buy/Sell</a></li>
+                <li><a href="#" >Contact</a></li>
+                <li><a href="#" >About</a></li>
+                <li><a href="#" id="register-link">Register</a></li>
+            </ul>
+        </div>
+        <div class="title">
+            <h1>Bringing Farmers and Merchants <br> together for <br> Seamless Grain Trade</h1>
+            <p>Your digital grain marketplace starts here!!</p>
+        </div>
+        <div class="button">
+            <a href="#" class="btn">Join Us</a>
+        </div>
+
+        <!-- Add this inside your <body>, ideally near the bottom -->
+        <!-- MODAL: LOGIN + REGISTER -->
+        <div class="modal-wrapper" id="auth-modal">
+            <div class="form-container">
+                <span class="close-btn" id="close-modal">&times;</span>
+
+                <!-- Toggle Buttons -->
+                <div class="toggle-buttons">
+                <button id="show-login" class="toggle-btn active">Login</button>
+                <button id="show-register" class="toggle-btn">Register</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <!-- LOGIN FORM -->
+                <form id="login-form">
+                    
+
+                    <div class="input-group">
+                        <label for="login-role">Role:</label>
+                        <select id="login-role" required>
+                            <option value="">Select Role</option>
+                            <option value="farmer">Farmer</option>
+                            <option value="merchant">Merchant</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="login-email">Email:</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+
+                    <button type="submit">Login</button>
+                    
+                    <div class="form-links">
+                        <a href="#" id="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <div class="divider">
+                        Don't have an account? <a href="#" id="switch-to-register">Register here</a>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="register-form" style="display: none;">
+                    
+
+                    <div class="input-group">
+                        <label for="role">Role:</label>
+                        <select id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="farmer">Farmer</option>
+                            <option value="merchant">Merchant</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="password-requirements hide" id="password-requirements">
+                            Password must be at least 8 characters long and contain uppercase, lowercase, and number.
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <div id="password-match-error" style="color: red; font-size: 12px; display: none;">
+                            Passwords don't match
+                        </div>
+                    </div>
+
+                    <!-- Farmer field -->
+                    <div class="input-group role-field" id="farmer-field" style="display: none;">
+                        <label for="farm-size">Farm Size (acres):</label>
+                        <input type="text" id="farm-size" name="farm-size">
+                    </div>
+
+                    <!-- Merchant field -->
+                    <div class="input-group role-field" id="merchant-field" style="display: none;">
+                        <label for="business-name">Business Name:</label>
+                        <input type="text" id="business-name" name="business-name">
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" id="terms-link">Terms & Conditions</a></label>
+                    </div>
+
+                    <button type="submit">Register</button>
+                    
+                    <div class="divider">
+                        Already have an account? <a href="#" id="switch-to-login">Login here</a>
+                    </div>
+                </form>
+            </div>
+    </header>
+
+        
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-cards">
+            <!-- Wide Variety Card -->
+            <div class="card">
+                <img src="{{url_for('static',filename='widevariety.png')}}" alt="Wide Variety Icon">
+                <h3>Wide Variety</h3>
+                <p>Choose from a wide range of grains like wheat, rice, and maize.</p>
+                <!-- <a href="#buy-grain" class="cta-button">Explore Grains</a> -->
+            </div>
+
+            <!-- Secure Payments Card -->
+            <div class="card">
+                <img src="{{url_for('static',filename='securepayment.png')}}" alt="Secure Payments Icon">
+                <h3>Secure Payments</h3>
+                <p>Enjoy safe and hassle-free transactions.</p>
+                <!-- <a href="#payment-info" class="cta-button">Learn More</a> -->
+            </div>
+
+            <!-- Fast Delivery Card -->
+            <div class="card">
+                <img src="{{url_for('static',filename='fastdelivery.png')}}" alt="Fast Delivery Icon">
+                <h3>Fast Delivery</h3>
+                <p>Get your grains delivered quickly and reliably.</p>
+                <!-- <a href="#delivery-info" class="cta-button">Track Order</a> -->
+            </div>
+
+            
+        </div>
+    </section>
+  
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('auth-modal');
+            const registerLink = document.getElementById('register-link');
+            const closeModal = document.getElementById('close-modal');
+
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showLoginBtn = document.getElementById('show-login');
+            const showRegisterBtn = document.getElementById('show-register');
+
+            const roleSelect = document.getElementById('role');
+            const farmerField = document.getElementById('farmer-field');
+            const merchantField = document.getElementById('merchant-field');
+
+            // Show modal
+            registerLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = 'flex';
+                showLogin();
+            });
+
+            closeModal.addEventListener('click', () => modal.style.display = 'none');
+            modal.addEventListener('click', e => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            showLoginBtn.addEventListener('click', showLogin);
+            showRegisterBtn.addEventListener('click', showRegister);
+
+            function showLogin() {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                showLoginBtn.classList.add('active');
+                showRegisterBtn.classList.remove('active');
+            }
+
+            function showRegister() {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                showRegisterBtn.classList.add('active');
+                showLoginBtn.classList.remove('active');
+            }
+
+            roleSelect.addEventListener('change', () => {
+                if (roleSelect.value === 'farmer') {
+                    farmerField.style.display = 'block';
+                    merchantField.style.display = 'none';
+                } else if (roleSelect.value === 'merchant') {
+                    merchantField.style.display = 'block';
+                    farmerField.style.display = 'none';
+                } else {
+                    farmerField.style.display = 'none';
+                    merchantField.style.display = 'none';
+                }
+            });
+
+            const switchToRegister = document.getElementById('switch-to-register');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const forgotPassword = document.getElementById('forgot-password');
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirm-password');
+            const passwordRequirements = document.getElementById('password-requirements');
+            const passwordMatchError = document.getElementById('password-match-error');
+
+            // Switch between forms
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                showRegister();
+            });
+
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLogin();
+            });
+
+            // Forgot password functionality
+            forgotPassword.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = prompt('Please enter your email address:');
+                if (email) {
+                    // You can implement actual forgot password logic here
+                    alert('Password reset link has been sent to ' + email);
+                }
+            });
+
+            // Password validation
+            passwordField.addEventListener('focus', () => {
+                passwordRequirements.classList.remove('hide');
+                passwordRequirements.classList.add('show');
+            });
+
+            passwordField.addEventListener('blur', () => {
+                passwordRequirements.classList.remove('show');
+                passwordRequirements.classList.add('hide');
+            });
+
+            // Password matching validation
+            confirmPasswordField.addEventListener('input', () => {
+                if (passwordField.value !== confirmPasswordField.value) {
+                    passwordMatchError.style.display = 'block';
+                } else {
+                    passwordMatchError.style.display = 'none';
+                }
+            });
+
+            // Enhanced form validation for registration
+            registerForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Check if passwords match
+                if (passwordField.value !== confirmPasswordField.value) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                // Check password strength
+                const password = passwordField.value;
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+                if (!passwordRegex.test(password)) {
+                    alert('Password must be at least 8 characters long and contain uppercase, lowercase, and number.');
+                    return;
+                }
+
+                // Your existing registration code...
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const role = document.getElementById('role').value;
+                const farmSize = document.getElementById('farm-size').value;
+                const businessName = document.getElementById('business-name').value;
+
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password,
+                        role,
+                        farm_size: farmSize || null,
+                        business_name: businessName || null
+                    })
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                if (response.ok) {
+                    modal.style.display = 'none';
+                    registerForm.reset();
+                }
+            });
+
+            // Fix your login form (add the missing lines)
+            loginForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                const role = document.getElementById('login-role').value;
+
+                try {
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({email, password, role})
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        alert(result.message);
+                        modal.style.display = 'none';  // ✅ Close the modal
+                        loginForm.reset();             // ✅ Clear the form
+                        if (result.redirect) {
+                            window.location.href = result.redirect;
+                        }
+                    } else {
+                        alert(result.message || 'Login failed');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        });
+    </script>
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

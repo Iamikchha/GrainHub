@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmer Dashboard - Grain Hub</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='farmer_dash.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="Profile" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNEREQiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIyNSIgcj0iMTAiIGZpbGw9IiM5OTkiLz4KPHBhdGggZD0iTTEwIDUwQzEwIDQwIDIwIDMwIDMwIDMwQzQwIDMwIDUwIDQwIDUwIDUwIiBmaWxsPSIjOTk5Ii8+Cjwvc3ZnPgo='">
+                <h3>{{ user[1] }}</h3>
+                <p>{{ user[2] }}</p>
+            </div>
+            
+            <h2>🌾 Grain Hub</h2>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active">📊 Dashboard</a></li>
+                <li><a href="#add-listing">➕ Add Listing</a></li>
+                <li><a href="#my-listings">📦 My Listings</a></li>
+                <li><a href="#inquiries">💬 Inquiries</a></li>
+                <li><a href="#analytics">📈 Analytics</a></li>
+                <li><a href="#settings">⚙️ Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Welcome back, {{ user[1] }}! 👋</h1>
+                <form method="post" action="/logout" style="margin: 0;">
+                    <button type="submit" class="logout-btn">🚪 Logout</button>
+                </form>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Add Listing Card -->
+                <div class="card">
+                    <h3>
+                        <div class="card-icon add-listing-icon">🌾</div>
+                        Post New Grain Listing
+                    </h3>
+                    <form method="post" action="/add_listing">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Grain Type</label>
+                                <input type="text" name="grain_type" placeholder="e.g., Wheat, Rice" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity (kg)</label>
+                                <input type="number" name="quantity" placeholder="1000" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Price per kg (₹)</label>
+                                <input type="number" name="price" placeholder="25.50" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Harvest Date</label>
+                                <input type="date" name="harvest_date" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">📝 Post Listing</button>
+                    </form>
+                </div>
+
+                <!-- My Listings Card -->
+                <div class="card">
+                    <h3>
+                        <div class="card-icon my-listings-icon">📦</div>
+                        My Listings ({{ listings|length }})
+                    </h3>
+                    <div class="listings-container">
+                        {% if listings %}
+                            {% for listing in listings %}
+                                <div class="listing-item">
+                                    <div class="listing-info">
+                                        <h4>{{ listing[2] }}</h4>
+                                        <p>Quantity: {{ listing[3] }} kg</p>
+                                        <p>Price: ₹{{ listing[4] }}/kg</p>
+                                        <p>Harvest: {{ listing[6] }}</p>
+                                    </div>
+                                    <div class="listing-actions">
+                                        <form method="post" action="/delete_listing" style="margin: 0;">
+                                            <input type="hidden" name="id" value="{{ listing[0] }}">
+                                            <button type="submit" class="btn btn-danger">🗑️</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty-state">
+                                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=80&h=80&fit=crop" alt="Empty" onerror="this.style.display='none'">
+                                <p>No listings yet. Create your first listing!</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inquiries Card -->
+            <div class="card">
+                <h3>
+                    <div class="card-icon inquiries-icon">💬</div>
+                    Merchant Inquiries ({{ inquiries|length }})
+                </h3>
+                {% if inquiries %}
+                    {% for inquiry in inquiries %}
+                        <div class="inquiry-item">
+                            <h4>{{ inquiry[0] }}</h4>
+                            <p><strong>Product:</strong> {{ inquiry[2] }}</p>
+                            <p><strong>Message:</strong> "{{ inquiry[1] }}"</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=80&h=80&fit=crop" alt="No inquiries" onerror="this.style.display='none'">
+                        <p>No inquiries yet. Merchants will contact you soon!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
